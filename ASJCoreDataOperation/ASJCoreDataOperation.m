@@ -22,6 +22,7 @@
 
 #import "ASJCoreDataOperation.h"
 #import <UIKit/UIApplication.h>
+#import <CoreData/NSManagedObjectContext.h>
 
 @interface ASJCoreDataOperation ()
 
@@ -86,9 +87,13 @@
 {
   id<UIApplicationDelegate> appDelegate = [UIApplication sharedApplication].delegate;
   
-  NSAssert([appDelegate respondsToSelector:@selector(managedObjectContext)], @"If managedObjectContext is not present in AppDelegate, you must provide one that operates on the main queue while initializing the operation.");
+  SEL managedObjectContext = NSSelectorFromString(@"managedObjectContext");
+  NSAssert([appDelegate respondsToSelector:managedObjectContext], @"If managedObjectContext is not present in AppDelegate, you must provide one that operates on the main queue while initializing the operation.");
   
-  return [appDelegate performSelector:@selector(managedObjectContext)];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+  return [appDelegate performSelector:managedObjectContext];
+#pragma clang diagnostic pop
 }
 
 #pragma mark - Notifications

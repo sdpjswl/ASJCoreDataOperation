@@ -21,7 +21,8 @@
 // THE SOFTWARE.
 
 @import Foundation;
-@import CoreData;
+
+@class NSManagedObjectContext;
 
 NS_ASSUME_NONNULL_BEGIN
 
