@@ -19,7 +19,7 @@ pod 'ASJCoreDataOperation'
 
 # Background
 
-* Key: `NSManagedObjectContext` = `moc`
+* **Key:** `NSManagedObjectContext` = `moc`
 
 ### Concurrency options
 There are three concurrency types defined in `NSManagedObjectContext.h`:
@@ -65,7 +65,7 @@ The `note` object has information of all modifications. There can be issues howe
 privateMoc.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
 ```
 
-* Note: There is another concurrency pattern, using child and parent `moc`s which has a simpler setup but it is not recommended because it blocks the main queue.
+* **Note:** There is another concurrency pattern, using child and parent `moc`s which has a simpler setup but it is not recommended because it blocks the main queue.
 
 # What this library does
 `ASJCoreDataOperation` is a subclass of `NSOperation` that provides private queue support out of the box. This class is designed to be subclassed and WILL NOT work without it.
