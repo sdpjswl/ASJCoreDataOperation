@@ -21,7 +21,7 @@
 // THE SOFTWARE.
 
 #import "ASJCoreDataOperation.h"
-#import "AppDelegate.h"
+#import <UIKit/UIApplication.h>
 
 @interface ASJCoreDataOperation ()
 
@@ -84,11 +84,11 @@
 
 - (NSManagedObjectContext *)appDelegateMoc
 {
-  AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+  id<UIApplicationDelegate> appDelegate = [UIApplication sharedApplication].delegate;
   
   NSAssert([appDelegate respondsToSelector:@selector(managedObjectContext)], @"If managedObjectContext is not present in AppDelegate, you must provide one that operates on the main queue while initializing the operation.");
   
-  return appDelegate.managedObjectContext;
+  return [appDelegate performSelector:@selector(managedObjectContext)];
 }
 
 #pragma mark - Notifications
