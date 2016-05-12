@@ -27,7 +27,7 @@ There are three concurrency types defined in `NSManagedObjectContext.h`:
 - `NSPrivateQueueConcurrencyType`
 - `NSMainQueueConcurrencyType`
 
-You should not use `NSConfinementConcurrencyType` anymore since it's obsolete and Apple dosn't recommend it. `NSPrivateQueueConcurrencyType` creates an `moc` on a background thread and `NSMainQueueConcurrencyType` creates one on the main queue. The one we are interested in is `NSPrivateQueueConcurrencyType`.
+You should not use `NSConfinementConcurrencyType` anymore since it's obsolete and Apple doesn't recommend it. `NSPrivateQueueConcurrencyType` creates an `moc` on a background thread and `NSMainQueueConcurrencyType` creates one on the main queue. The one we are interested in is `NSPrivateQueueConcurrencyType`.
 
 ### Creating an `NSManagedObjectContext`
 You can create as many `moc`s as you wish. During saving, it must go through an `NSPersistentStoreCoordinator` to write data to an sqlite file. You can use the one implemented in `AppDelegate` or provide your own.
