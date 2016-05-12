@@ -37,10 +37,10 @@ NSManagedObjectContext *privateMoc = [[NSManagedObjectContext alloc] initWithCon
 privateMoc.persistentStoreCoordinator = appDelegatesPersistentStoreCoordinator;
 ```
 
-There are two methods, `performBlock:(void (^)())block` and `performBlockAndWait:(void (^)())block`. Any code written in those blocks is GUARANTEED to be executed on the same queue the `moc` is created. You MUST write your `CoreData` logic inside one of these methods.
+There are two methods, `performBlock:(void (^)())block` and `performBlockAndWait:(void (^)())block`. Any code written in those blocks is GUARANTEED to be executed on the same queue the `moc` is created. You **must** write your `CoreData` logic inside one of these methods.
 
 ### Saving on a private queue
-Whenever a `save` happens on a private `moc`, data will be written to the sqlite file but the main queue will not be notified about it. If you have an `NSFetchedResultsController` setup on the main queue, control will NOT reach its delegate methods. However, if the `CoreData` operation and `NSFetchedResultsController` share the same `moc`, it will work.
+Whenever a `save` happens on a private `moc`, data will be written to the sqlite file but the main queue will not be notified about it. If you have an `NSFetchedResultsController` setup on the main queue, control will **not** reach its delegate methods. However, if the `CoreData` operation and `NSFetchedResultsController` share the same `moc`, it will work.
 
 If you need the main queue to be notified about any changes made by a private context, you need to merge those changes from the private `moc` to the main `moc`. To do so, you have to start observing for `NSManagedObjectContextDidSaveNotification`s on the private `moc`.
 
@@ -68,7 +68,7 @@ privateMoc.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
 * **Note:** There is another concurrency pattern, using child and parent `moc`s which has a simpler setup but it is not recommended because it blocks the main queue.
 
 # What this library does
-`ASJCoreDataOperation` is a subclass of `NSOperation` that provides private queue support out of the box. This class is designed to be subclassed and WILL NOT work without it.
+`ASJCoreDataOperation` is a subclass of `NSOperation` that provides private queue support out of the box. This class is designed to be subclassed and **will not** work without it.
 
 ```objc
 - (instancetype)initWithPrivateMoc:(nullable NSManagedObjectContext *)privateMoc mainMoc:(nullable NSManagedObjectContext *)mainMoc NS_DESIGNATED_INITIALIZER;
