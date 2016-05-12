@@ -83,7 +83,7 @@ Irrespective of the way the private `moc` is created, it is publicly exposed and
 ```objc 
 - (void)coreDataOperation;
 ```
-This is the method you are REQUIRED to override in your subclass. Any `CoreData` operations you wish to perform should be written here. The library will ensure that this method is called on the correct thread.
+This is the method you are **required** to override in your subclass. Any `CoreData` operations you wish to perform should be written here. The library will ensure that this method is called on the correct thread.
 
 ### Usage
 ```objc
