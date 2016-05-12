@@ -37,7 +37,7 @@ NSManagedObjectContext *privateMoc = [[NSManagedObjectContext alloc] initWithCon
 privateMoc.persistentStoreCoordinator = appDelegatesPersistentStoreCoordinator;
 ```
 
-There are two methods, `performBlock:(void (^)())block` and `performBlockAndWait:(void (^)())block`. Any code written in those blocks is GUARANTEED to be executed on the same queue the `moc` is created. You **must** write your `CoreData` logic inside one of these methods.
+There are two methods, `performBlock:(void (^)())block` and `performBlockAndWait:(void (^)())block`. Any code written in those blocks is **guaranteed* to be executed on the same queue the `moc` is created. You **must** write your `CoreData` logic inside one of these methods.
 
 ### Saving on a private queue
 Whenever a `save` happens on a private `moc`, data will be written to the sqlite file but the main queue will not be notified about it. If you have an `NSFetchedResultsController` setup on the main queue, control will **not** reach its delegate methods. However, if the `CoreData` operation and `NSFetchedResultsController` share the same `moc`, it will work.
