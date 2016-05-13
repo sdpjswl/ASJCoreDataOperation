@@ -11,6 +11,7 @@ The main drawback of using `AppDelegate`'s managed object context is that whenev
 The solution is to do such `CoreData` operations in the background and only when you have to do any UI changes, say reloading a table, you call `reloadData` on the main queue.
 
 # Installation
+
 CocoaPods is the preferred way to install this library. Add this command to your `Podfile`:
 
 ```
@@ -40,6 +41,7 @@ privateMoc.persistentStoreCoordinator = appDelegatesPersistentStoreCoordinator;
 There are two methods, `performBlock:(void (^)())block` and `performBlockAndWait:(void (^)())block`. Any code written in those blocks is **guaranteed** to be executed on the same queue the `moc` is created. You **must** write your `CoreData` logic inside one of these methods.
 
 ### Saving on a private queue
+
 Whenever a `save` happens on a private `moc`, data will be written to the sqlite file but the main queue will not be notified about it. If you have an `NSFetchedResultsController` setup on the main queue, control will **not** reach its delegate methods. However, if the `CoreData` operation and `NSFetchedResultsController` share the same `moc`, it will work.
 
 If you need the main queue to be notified about any changes made by a private context, you need to merge those changes from the private `moc` to the main `moc`. To do so, you have to start observing for `NSManagedObjectContextDidSaveNotification`s on the private `moc`.
@@ -68,6 +70,7 @@ privateMoc.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
 * **Note:** There is another concurrency pattern, using child and parent `moc`s which has a simpler setup but it is not recommended because it blocks the main queue.
 
 # What this library does
+
 `ASJCoreDataOperation` is a subclass of `NSOperation` that provides private queue support out of the box. This class is designed to be subclassed and **will not** work without it.
 
 ```objc
@@ -86,6 +89,7 @@ Irrespective of the way the private `moc` is created, it is publicly exposed and
 This is the method you are **required** to override in your subclass. Any `CoreData` operations you wish to perform should be written here. The library will ensure that this method is called on the correct thread.
 
 ### Usage
+
 ```objc
 NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
 SomeCoreDataOperationSubclass *operation = [[SomeCoreDataOperationSubclass alloc] initWithPrivateMoc:somePrivateMoc mainMoc:nil];
@@ -94,6 +98,7 @@ SomeCoreDataOperationSubclass *operation = [[SomeCoreDataOperationSubclass alloc
 As soon the `operation` is added to the `operationQueue`, it will start running on a background queue.
 
 # Credits
+
 - To [Shashank Pali](https://github.com/shashankpali) for fixing the UI issues in the example project.
 - [Core Data Programming Guide - Concurrency](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CoreData/Concurrency.html)
 - [Core Data from Scratch: Concurrency](http://code.tutsplus.com/tutorials/core-data-from-scratch-concurrency--cms-22131)
@@ -101,9 +106,11 @@ As soon the `operation` is added to the `operationQueue`, it will start running 
 - [Common Background Practices](https://www.objc.io/issues/2-concurrency/common-background-practices/)
 - [Importing Large Data Sets](https://www.objc.io/issues/4-core-data/importing-large-data-sets-into-core-data/)
 
-### To-do
+# To-do
+
 - A completion block to know when operation is complete
 - A way to cancel operation midway
 
 # License
+
 `ASJCoreDataOperation` is available under the MIT license. See the LICENSE file for more info.
