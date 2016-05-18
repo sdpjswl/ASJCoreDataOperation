@@ -1,12 +1,12 @@
 # ASJCoreDataOperation
 
-Adding concurrency/multi-threading to `CoreData` is not very straightforward and obvious. The main issue is with `NSManagedObjectContext`, which is thread unsafe. The default one created in `AppDelegate` is created on the main thread, like so:
+Adding concurrency/multi-threading to `CoreData` is not very straightforward and obvious. The main issue is with `NSManagedObjectContext`, which is thread unsafe. The default one created in `AppDelegate` is created on the main thread:
 
 ```objc
 _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
 ```
 
-The main drawback of using `AppDelegate`'s managed object context is that whenever a save, fetch or delete operation is performed, the main thread, or UI will get blocked. If you are doing small operations, this may not be noticeable. But for larger operations, it will pose a problem.
+The main drawback of using `AppDelegate`'s managed object context is that whenever a save, fetch or delete operation is performed, the main thread/UI will get blocked. If you are doing small operations, this may not be noticeable. But for larger operations, it will pose a problem.
 
 The solution is to do such `CoreData` operations in the background and only when you have to do any UI changes, say reloading a table, you call `reloadData` on the main queue.
 
@@ -31,20 +31,21 @@ There are three concurrency types defined in `NSManagedObjectContext.h`:
 You should not use `NSConfinementConcurrencyType` anymore since it's obsolete and Apple doesn't recommend it. `NSPrivateQueueConcurrencyType` creates an `moc` on a background thread and `NSMainQueueConcurrencyType` creates one on the main queue. The one we are interested in is `NSPrivateQueueConcurrencyType`.
 
 ### Creating an `NSManagedObjectContext`
-You can create as many `moc`s as you wish. During saving, it must go through an `NSPersistentStoreCoordinator` to write data to an sqlite file. You can use the one implemented in `AppDelegate` or provide your own.
+
+You can create as many `moc`s as you wish. During saving, it must go through an `NSPersistentStoreCoordinator` to write data to an sqlite file. You can use the one implemented in `AppDelegate` or provide your own. Just make sure that no matter what kind of store your app has; `NSSQLiteStoreType`, `NSXMLStoreType`, `NSBinaryStoreType` or `NSInMemoryStoreType`, the coordinator object must be tied to the same destination.
 
 ```objc
 NSManagedObjectContext *privateMoc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
 privateMoc.persistentStoreCoordinator = appDelegatesPersistentStoreCoordinator;
 ```
 
-There are two methods, `performBlock:(void (^)())block` and `performBlockAndWait:(void (^)())block`. Any code written in those blocks is **guaranteed** to be executed on the same queue the `moc` is created. You **must** write your `CoreData` logic inside one of these methods.
+There are two methods for `moc`s, `performBlock:(void (^)())block` and `performBlockAndWait:(void (^)())block`. Any code written in those blocks is **guaranteed** to be executed on the same queue the `moc` is created. You **must** write your `CoreData` logic inside one of these methods. The difference between the two is that `performBlockAndWait:` will block the queue until it's operation is completed.
 
 ### Saving on a private queue
 
 Whenever a `save` happens on a private `moc`, data will be written to the sqlite file but the main queue will not be notified about it. If you have an `NSFetchedResultsController` setup on the main queue, control will **not** reach its delegate methods. However, if the `CoreData` operation and `NSFetchedResultsController` share the same `moc`, it will work.
 
-If you need the main queue to be notified about any changes made by a private context, you need to merge those changes from the private `moc` to the main `moc`. To do so, you have to start observing for `NSManagedObjectContextDidSaveNotification`s on the private `moc`.
+If you need the main queue to be notified about any changes made by a private context, you need to merge those changes from the private `moc` to the main `moc`. To do so, you have to start observing for `NSManagedObjectContextDidSaveNotification` on the private `moc`.
 
 ```objc
 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextDidSave:) name:NSManagedObjectContextDidSaveNotification object:privateMoc];
@@ -61,7 +62,7 @@ In `contextDidSave:` we need to merge the private `moc` changes into the main `m
 }
 ```
 
-The `note` object has information of all modifications. There can be issues however when merging data between two `moc`s and conflicts may arise. So, you must provide a `mergePolicy` so that `CoreData` knows how to resolve them.
+The `note` object has information of all modifications made to the managed objects. There can be issues however when merging data between two `moc`s and conflicts may arise. So, you must provide a `mergePolicy` so that `CoreData` knows how to resolve them.
 
 ```objc
 privateMoc.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
@@ -76,7 +77,7 @@ privateMoc.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
 ```objc
 - (instancetype)initWithPrivateMoc:(nullable NSManagedObjectContext *)privateMoc mainMoc:(nullable NSManagedObjectContext *)mainMoc NS_DESIGNATED_INITIALIZER;
 ```
-This is the recommended way to create an instance of your subclass. You may pass `nil` in both arguments or use the `init` method. In those cases, a private moc will be created and `AppDelegate`'s `moc` will be accessed to be used as the `mainMoc`.
+This is the recommended way to create an instance of your subclass. You may pass `nil` in both arguments or use the `init` method. In those cases, a private moc will be created and `AppDelegate`'s `moc` will be accessed to be used as the `mainMoc`. If your `AppDelegate` does not have an `moc` object, you must provide one that is created on the main queue.
 
 ```objc
 @property (readonly, strong, nonatomic) NSManagedObjectContext *privateMoc;
