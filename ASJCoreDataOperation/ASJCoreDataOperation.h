@@ -30,12 +30,12 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ASJCoreDataOperation : NSOperation
 
 /**
- *  The private managed object context, either the one passed during initialization OR created internally. You can use it with a NSFetchedResultsController to do asynchronous fetches.
+ *  If you pass in your own managed object context during initialization, this property will hold it. If you don't, one will be created internally and will be available publicly with this property. You can use this managed object context property to create an NSFetchedResultsController and do asynchronous fetches. It is recommended that you do your fetches in the background and update UI on the main queue.
  */
 @property (readonly, strong, nonatomic) NSManagedObjectContext *privateMoc;
 
 /**
- *  The designated initializer. If you create an instance using 'init', a managed object context on a private queue will be created for you and it will attempt to access the main queue managed object context from the project's AppDelegate.m.
+ *  The designated initializer that requires you to pass two NSManagedObjectContexts; one created on a private queue, and one on the main queue. If you checked "Use Core Data" while creating your project, you will have a "managedObjectContext" property in AppDelegate.h. It is created on the main queue, and if you want, you can pass it but you don't need to. Both arguments here are optional and if the "mainMoc" is not specified, the library will attempt to access the one defined in the app delegate. However, things will not work if moc is not present in the app delegate. In that case, you must provide one yourself. Parallelly, you can provide a private moc or not. If you don't, one will be created and will be available as a public property, as shown above.
  *
  *  @param privateMoc You can pass a managed object context of your own with  "NSPrivateQueueConcurrencyType". You can tie it with a "NSFetchedResultsController" to do async fetches so that the main thread is not blocked. This parameter is optional, and if you don't provide a managed object context, one will be created internally.
  *  @param mainMoc You can pass a managed object context with "NSMainQueueConcurrencyType". If you have created your project with CoreData enabled, the default moc in AppDelegate.m is of this type. You can, if you wish pass it in this argument, but it you keep it nil, it will attempt to access the same from your AppDelegate.
