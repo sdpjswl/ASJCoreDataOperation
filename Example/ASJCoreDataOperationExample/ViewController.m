@@ -108,7 +108,9 @@ static NSString *const kCellIdentifier = @"cell";
     
     if (shouldShowIndicator) {
       [_indicator startAnimating];
-    }else{
+    }
+    else
+    {
       [_indicator stopAnimating];
       [_indicator removeFromSuperview];
     }
