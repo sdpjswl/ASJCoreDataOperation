@@ -13,11 +13,11 @@
 		6BD550A41CE41E0700A44CB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BD550A21CE41E0700A44CB4 /* Main.storyboard */; };
 		6BD550A91CE41E0700A44CB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BD550A81CE41E0700A44CB4 /* Assets.xcassets */; };
 		6BD550AC1CE41E0700A44CB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BD550AA1CE41E0700A44CB4 /* LaunchScreen.storyboard */; };
-		6BD550B91CE41E5F00A44CB4 /* ASJCoreDataOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD550B81CE41E5F00A44CB4 /* ASJCoreDataOperation.m */; };
 		6BD550BD1CE4289700A44CB4 /* ASJCoreDataOperationExample.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6BD550BB1CE4289700A44CB4 /* ASJCoreDataOperationExample.xcdatamodeld */; };
 		6BD550CE1CE429EE00A44CB4 /* Photo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD550CB1CE429EE00A44CB4 /* Photo+CoreDataProperties.m */; };
 		6BD550CF1CE429EE00A44CB4 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD550CD1CE429EE00A44CB4 /* Photo.m */; };
 		6BD550D21CE42D3400A44CB4 /* SavePhotosOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD550D11CE42D3400A44CB4 /* SavePhotosOperation.m */; };
+		C09991871CF2A59700212CD6 /* ASJCoreDataOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C09991861CF2A59700212CD6 /* ASJCoreDataOperation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,8 +31,6 @@
 		6BD550A81CE41E0700A44CB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6BD550AB1CE41E0700A44CB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6BD550AD1CE41E0700A44CB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6BD550B71CE41E5F00A44CB4 /* ASJCoreDataOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASJCoreDataOperation.h; sourceTree = "<group>"; };
-		6BD550B81CE41E5F00A44CB4 /* ASJCoreDataOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASJCoreDataOperation.m; sourceTree = "<group>"; };
 		6BD550BC1CE4289700A44CB4 /* ASJCoreDataOperationExample.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ASJCoreDataOperationExample.xcdatamodel; sourceTree = "<group>"; };
 		6BD550CA1CE429EE00A44CB4 /* Photo+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Photo+CoreDataProperties.h"; sourceTree = "<group>"; };
 		6BD550CB1CE429EE00A44CB4 /* Photo+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Photo+CoreDataProperties.m"; sourceTree = "<group>"; };
@@ -40,6 +38,8 @@
 		6BD550CD1CE429EE00A44CB4 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 		6BD550D01CE42D3300A44CB4 /* SavePhotosOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavePhotosOperation.h; sourceTree = "<group>"; };
 		6BD550D11CE42D3400A44CB4 /* SavePhotosOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavePhotosOperation.m; sourceTree = "<group>"; };
+		C09991851CF2A59700212CD6 /* ASJCoreDataOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASJCoreDataOperation.h; sourceTree = "<group>"; };
+		C09991861CF2A59700212CD6 /* ASJCoreDataOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASJCoreDataOperation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +72,7 @@
 		6BD550981CE41E0700A44CB4 /* ASJCoreDataOperationExample */ = {
 			isa = PBXGroup;
 			children = (
-				6BD550B31CE41E5200A44CB4 /* ASJCoreDataOperation */,
+				C09991841CF2A59700212CD6 /* ASJCoreDataOperation */,
 				6BD550BA1CE4289700A44CB4 /* Core Data */,
 				6BD5509C1CE41E0700A44CB4 /* AppDelegate.h */,
 				6BD5509D1CE41E0700A44CB4 /* AppDelegate.m */,
@@ -97,16 +97,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		6BD550B31CE41E5200A44CB4 /* ASJCoreDataOperation */ = {
-			isa = PBXGroup;
-			children = (
-				6BD550B71CE41E5F00A44CB4 /* ASJCoreDataOperation.h */,
-				6BD550B81CE41E5F00A44CB4 /* ASJCoreDataOperation.m */,
-			);
-			name = ASJCoreDataOperation;
-			path = ../../ASJCoreDataOperation;
-			sourceTree = "<group>";
-		};
 		6BD550BA1CE4289700A44CB4 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +107,15 @@
 				6BD550BB1CE4289700A44CB4 /* ASJCoreDataOperationExample.xcdatamodeld */,
 			);
 			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		C09991841CF2A59700212CD6 /* ASJCoreDataOperation */ = {
+			isa = PBXGroup;
+			children = (
+				C09991851CF2A59700212CD6 /* ASJCoreDataOperation.h */,
+				C09991861CF2A59700212CD6 /* ASJCoreDataOperation.m */,
+			);
+			path = ASJCoreDataOperation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,7 +191,7 @@
 				6BD550CF1CE429EE00A44CB4 /* Photo.m in Sources */,
 				6BD550CE1CE429EE00A44CB4 /* Photo+CoreDataProperties.m in Sources */,
 				6BD550A11CE41E0700A44CB4 /* ViewController.m in Sources */,
-				6BD550B91CE41E5F00A44CB4 /* ASJCoreDataOperation.m in Sources */,
+				C09991871CF2A59700212CD6 /* ASJCoreDataOperation.m in Sources */,
 				6BD5509E1CE41E0700A44CB4 /* AppDelegate.m in Sources */,
 				6BD550D21CE42D3400A44CB4 /* SavePhotosOperation.m in Sources */,
 				6BD550BD1CE4289700A44CB4 /* ASJCoreDataOperationExample.xcdatamodeld in Sources */,
