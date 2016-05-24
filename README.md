@@ -18,6 +18,8 @@ CocoaPods is the preferred way to install this library. Add this command to your
 pod 'ASJCoreDataOperation'
 ```
 
+For the same library in `Swift`, see [CoreDataOperation](https://github.com/sudeepjaiswal/CoreDataOperation).
+
 # Background
 
 * **Key:** `NSManagedObjectContext` = `moc`
