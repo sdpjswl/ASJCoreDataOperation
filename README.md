@@ -89,6 +89,11 @@ This is the recommended way to create an instance of your subclass. You may pass
 
 Irrespective of the way the private `moc` is created, it is publicly exposed and you may use it, say to tie an `NSFetchedResultsController` to it and do asynchronous fetches.
 
+```objc
+@property (copy) SaveBlock saveBlock;
+```
+A block that is fired when a save operation is completed.
+
 ```objc 
 - (void)coreDataOperation;
 ```
@@ -115,7 +120,7 @@ As soon the `operation` is added to the `operationQueue`, it will start running 
 
 # To-do
 
-- A completion block to know when operation is complete.
+- ~~A completion block to know when operation is complete.~~
 - A way to cancel operation midway.
 
 # License
