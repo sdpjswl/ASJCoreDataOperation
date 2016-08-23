@@ -39,11 +39,12 @@
     photoManagedObject.title = photoInfo[@"title"];
     photoManagedObject.url = photoInfo[@"url"];
     photoManagedObject.thumbnailUrl = photoInfo[@"thumbnailUrl"];
-    
-    BOOL success = [self.privateMoc save:&error];
-    if (!success || error) {
-      NSLog(@"error saving photo: %@", error.localizedDescription);
-    }
+  }
+  
+  NSError *error = nil;
+  BOOL success = [self.privateMoc save:&error];
+  if (!success || error) {
+    NSLog(@"error saving photo: %@", error.localizedDescription);
   }
 }
 
