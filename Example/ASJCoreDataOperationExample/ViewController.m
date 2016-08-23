@@ -87,9 +87,6 @@ static NSString *const kCellIdentifier = @"cell";
           return;
         }
         
-        // hide indicator
-        self.shouldShowIndicator = NO;
-        
         // save
         [self savePhotosToCoreData:photos];
         
@@ -124,6 +121,14 @@ static NSString *const kCellIdentifier = @"cell";
   SavePhotosOperation *operation = [[SavePhotosOperation alloc] initWithPrivateMoc:self.photosPrivateMoc mainMoc:nil];
   operation.photos = photos;
   [_operationQueue addOperation:operation];
+  
+  [operation setSaveBlock:^
+   {
+     NSLog(@"saved");
+     
+     // hide indicator
+     self.shouldShowIndicator = NO;
+   }];
 }
 
 #pragma mark - UITableViewDataSource
