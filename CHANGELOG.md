@@ -1,5 +1,11 @@
 # Change Log
 
+## [1.0](https://github.com/sudeepjaiswal/ASJCoreDataOperation/releases/tag/1.0)
+Released on Tuesday, 23 Aug, 2016.
+
+#### Added
+* A block property `saveBlock` that captures the event when a save operation is completed.
+
 ## [0.3](https://github.com/sudeepjaiswal/ASJCoreDataOperation/releases/tag/0.3)
 Released on Wednesday, 18 May, 2016.
 
