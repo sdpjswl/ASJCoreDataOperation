@@ -110,9 +110,15 @@
     return;
   }
   
-  [_mainMoc performBlock:^{
-    [_mainMoc mergeChangesFromContextDidSaveNotification:note];
-  }];
+  [_mainMoc performBlock:^
+   {
+     [_mainMoc mergeChangesFromContextDidSaveNotification:note];
+     
+     // saving is complete here
+     if (_saveBlock) {
+       _saveBlock();
+     }
+   }];
 }
 
 - (void)dealloc

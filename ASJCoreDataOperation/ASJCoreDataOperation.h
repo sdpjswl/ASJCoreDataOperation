@@ -27,12 +27,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^SaveBlock)();
+
 @interface ASJCoreDataOperation : NSOperation
 
 /**
  *  If you pass in your own managed object context during initialization, this property will hold it. If you don't, one will be created internally and will be available publicly with this property. You can use this managed object context property to create an NSFetchedResultsController and do asynchronous fetches. It is recommended that you do your fetches in the background and update UI on the main queue.
  */
 @property (readonly, strong, nonatomic) NSManagedObjectContext *privateMoc;
+
+/**
+ *  A block you can listen to that is fired when a save operation is completed.
+ */
+@property (copy) SaveBlock saveBlock;
 
 /**
  *  The designated initializer that requires you to pass two NSManagedObjectContexts; one created on a private queue, and one on the main queue. If you checked "Use Core Data" while creating your project, you will have a "managedObjectContext" property in AppDelegate.h. It is created on the main queue, and if you want, you can pass it but you don't need to. Both arguments here are optional and if the "mainMoc" is not specified, the library will attempt to access the one defined in the app delegate. However, things will not work if moc is not present in the app delegate. In that case, you must provide one yourself. Parallelly, you can provide a private moc or not. If you don't, one will be created and will be available as a public property, as shown above.
@@ -48,6 +55,13 @@ NS_ASSUME_NONNULL_BEGIN
  *  Override this method in your ASJCoreDataOperation subclass and write your logic there. Any fetching/saving to core data must happen in this method. Whenever you want to access the managed object context, ALWAYS use the "privateMoc" property declared above.
  */
 - (void)coreDataOperation;
+
+/**
+ *  The setter for the save block. You can listen to this block to get the save operation completiion event.
+ *
+ *  @param saveBlock The block that will be firec when a save operation is completed.
+ */
+- (void)setSaveBlock:(SaveBlock _Nonnull)saveBlock;
 
 @end
 
