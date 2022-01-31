@@ -140,7 +140,7 @@
 
 - (void)main
 {
-    [_privateMoc performBlock:^{
+    [_privateMoc performBlockAndWait:^{
         [self coreDataOperation];
     }];
 }
