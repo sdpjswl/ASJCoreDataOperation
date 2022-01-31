@@ -13,15 +13,15 @@
 		6BD550A41CE41E0700A44CB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BD550A21CE41E0700A44CB4 /* Main.storyboard */; };
 		6BD550A91CE41E0700A44CB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BD550A81CE41E0700A44CB4 /* Assets.xcassets */; };
 		6BD550AC1CE41E0700A44CB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BD550AA1CE41E0700A44CB4 /* LaunchScreen.storyboard */; };
-		6BD550BD1CE4289700A44CB4 /* ASJCoreDataOperationExample.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6BD550BB1CE4289700A44CB4 /* ASJCoreDataOperationExample.xcdatamodeld */; };
+		6BD550BD1CE4289700A44CB4 /* ObjCExample.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6BD550BB1CE4289700A44CB4 /* ObjCExample.xcdatamodeld */; };
 		6BD550CE1CE429EE00A44CB4 /* Photo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD550CB1CE429EE00A44CB4 /* Photo+CoreDataProperties.m */; };
 		6BD550CF1CE429EE00A44CB4 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD550CD1CE429EE00A44CB4 /* Photo.m */; };
-		6BD550D21CE42D3400A44CB4 /* SavePhotosOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD550D11CE42D3400A44CB4 /* SavePhotosOperation.m */; };
-		C099919A1CF2BB5500212CD6 /* ASJCoreDataOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C09991991CF2BB5500212CD6 /* ASJCoreDataOperation.m */; };
+		C018350127A892FA00509DFD /* ASJCoreDataOperation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C018350027A892F900509DFD /* ASJCoreDataOperation.framework */; };
+		C0D1B3DF27A89417001F8453 /* SavePhotosOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C0D1B3DD27A89417001F8453 /* SavePhotosOperation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6BD550961CE41E0700A44CB4 /* ASJCoreDataOperationExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ASJCoreDataOperationExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6BD550961CE41E0700A44CB4 /* ObjCExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ObjCExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BD5509A1CE41E0700A44CB4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6BD5509C1CE41E0700A44CB4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6BD5509D1CE41E0700A44CB4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -36,10 +36,9 @@
 		6BD550CB1CE429EE00A44CB4 /* Photo+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Photo+CoreDataProperties.m"; sourceTree = "<group>"; };
 		6BD550CC1CE429EE00A44CB4 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
 		6BD550CD1CE429EE00A44CB4 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
-		6BD550D01CE42D3300A44CB4 /* SavePhotosOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavePhotosOperation.h; sourceTree = "<group>"; };
-		6BD550D11CE42D3400A44CB4 /* SavePhotosOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavePhotosOperation.m; sourceTree = "<group>"; };
-		C09991981CF2BB5500212CD6 /* ASJCoreDataOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASJCoreDataOperation.h; sourceTree = "<group>"; };
-		C09991991CF2BB5500212CD6 /* ASJCoreDataOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASJCoreDataOperation.m; sourceTree = "<group>"; };
+		C018350027A892F900509DFD /* ASJCoreDataOperation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ASJCoreDataOperation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0D1B3DD27A89417001F8453 /* SavePhotosOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavePhotosOperation.m; sourceTree = "<group>"; };
+		C0D1B3DE27A89417001F8453 /* SavePhotosOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavePhotosOperation.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C018350127A892FA00509DFD /* ASJCoreDataOperation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,36 +56,34 @@
 		6BD5508D1CE41E0700A44CB4 = {
 			isa = PBXGroup;
 			children = (
-				6BD550981CE41E0700A44CB4 /* ASJCoreDataOperationExample */,
+				6BD550981CE41E0700A44CB4 /* ObjCExample */,
 				6BD550971CE41E0700A44CB4 /* Products */,
+				C01834FF27A892F900509DFD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		6BD550971CE41E0700A44CB4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6BD550961CE41E0700A44CB4 /* ASJCoreDataOperationExample.app */,
+				6BD550961CE41E0700A44CB4 /* ObjCExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6BD550981CE41E0700A44CB4 /* ASJCoreDataOperationExample */ = {
+		6BD550981CE41E0700A44CB4 /* ObjCExample */ = {
 			isa = PBXGroup;
 			children = (
-				C09991971CF2BB5500212CD6 /* ASJCoreDataOperation */,
-				6BD550BA1CE4289700A44CB4 /* Core Data */,
 				6BD5509C1CE41E0700A44CB4 /* AppDelegate.h */,
 				6BD5509D1CE41E0700A44CB4 /* AppDelegate.m */,
 				6BD5509F1CE41E0700A44CB4 /* ViewController.h */,
 				6BD550A01CE41E0700A44CB4 /* ViewController.m */,
-				6BD550D01CE42D3300A44CB4 /* SavePhotosOperation.h */,
-				6BD550D11CE42D3400A44CB4 /* SavePhotosOperation.m */,
+				6BD550BA1CE4289700A44CB4 /* Core Data */,
 				6BD550A21CE41E0700A44CB4 /* Main.storyboard */,
 				6BD550AA1CE41E0700A44CB4 /* LaunchScreen.storyboard */,
 				6BD550A81CE41E0700A44CB4 /* Assets.xcassets */,
 				6BD550991CE41E0700A44CB4 /* Supporting Files */,
 			);
-			path = ASJCoreDataOperationExample;
+			path = ObjCExample;
 			sourceTree = "<group>";
 		};
 		6BD550991CE41E0700A44CB4 /* Supporting Files */ = {
@@ -100,31 +98,31 @@
 		6BD550BA1CE4289700A44CB4 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				6BD550BB1CE4289700A44CB4 /* ObjCExample.xcdatamodeld */,
 				6BD550CC1CE429EE00A44CB4 /* Photo.h */,
 				6BD550CD1CE429EE00A44CB4 /* Photo.m */,
 				6BD550CA1CE429EE00A44CB4 /* Photo+CoreDataProperties.h */,
 				6BD550CB1CE429EE00A44CB4 /* Photo+CoreDataProperties.m */,
-				6BD550BB1CE4289700A44CB4 /* ASJCoreDataOperationExample.xcdatamodeld */,
+				C0D1B3DE27A89417001F8453 /* SavePhotosOperation.h */,
+				C0D1B3DD27A89417001F8453 /* SavePhotosOperation.m */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
 		};
-		C09991971CF2BB5500212CD6 /* ASJCoreDataOperation */ = {
+		C01834FF27A892F900509DFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C09991981CF2BB5500212CD6 /* ASJCoreDataOperation.h */,
-				C09991991CF2BB5500212CD6 /* ASJCoreDataOperation.m */,
+				C018350027A892F900509DFD /* ASJCoreDataOperation.framework */,
 			);
-			name = ASJCoreDataOperation;
-			path = ../../ASJCoreDataOperation;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6BD550951CE41E0700A44CB4 /* ASJCoreDataOperationExample */ = {
+		6BD550951CE41E0700A44CB4 /* ObjCExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6BD550B01CE41E0700A44CB4 /* Build configuration list for PBXNativeTarget "ASJCoreDataOperationExample" */;
+			buildConfigurationList = 6BD550B01CE41E0700A44CB4 /* Build configuration list for PBXNativeTarget "ObjCExample" */;
 			buildPhases = (
 				6BD550921CE41E0700A44CB4 /* Sources */,
 				6BD550931CE41E0700A44CB4 /* Frameworks */,
@@ -134,9 +132,9 @@
 			);
 			dependencies = (
 			);
-			name = ASJCoreDataOperationExample;
+			name = ObjCExample;
 			productName = ASJCoreDataOperationExample;
-			productReference = 6BD550961CE41E0700A44CB4 /* ASJCoreDataOperationExample.app */;
+			productReference = 6BD550961CE41E0700A44CB4 /* ObjCExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -153,7 +151,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6BD550911CE41E0700A44CB4 /* Build configuration list for PBXProject "ASJCoreDataOperationExample" */;
+			buildConfigurationList = 6BD550911CE41E0700A44CB4 /* Build configuration list for PBXProject "ObjCExample" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -166,7 +164,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6BD550951CE41E0700A44CB4 /* ASJCoreDataOperationExample */,
+				6BD550951CE41E0700A44CB4 /* ObjCExample */,
 			);
 		};
 /* End PBXProject section */
@@ -192,10 +190,9 @@
 				6BD550CF1CE429EE00A44CB4 /* Photo.m in Sources */,
 				6BD550CE1CE429EE00A44CB4 /* Photo+CoreDataProperties.m in Sources */,
 				6BD550A11CE41E0700A44CB4 /* ViewController.m in Sources */,
-				C099919A1CF2BB5500212CD6 /* ASJCoreDataOperation.m in Sources */,
 				6BD5509E1CE41E0700A44CB4 /* AppDelegate.m in Sources */,
-				6BD550D21CE42D3400A44CB4 /* SavePhotosOperation.m in Sources */,
-				6BD550BD1CE4289700A44CB4 /* ASJCoreDataOperationExample.xcdatamodeld in Sources */,
+				C0D1B3DF27A89417001F8453 /* SavePhotosOperation.m in Sources */,
+				6BD550BD1CE4289700A44CB4 /* ObjCExample.xcdatamodeld in Sources */,
 				6BD5509B1CE41E0700A44CB4 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -329,9 +326,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
-				INFOPLIST_FILE = ASJCoreDataOperationExample/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ObjCExample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sudeep.ASJCoreDataOperationExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sudeep.ASJCoreDataOperation.ObjCExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -341,9 +338,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
-				INFOPLIST_FILE = ASJCoreDataOperationExample/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ObjCExample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sudeep.ASJCoreDataOperationExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sudeep.ASJCoreDataOperation.ObjCExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -351,7 +348,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6BD550911CE41E0700A44CB4 /* Build configuration list for PBXProject "ASJCoreDataOperationExample" */ = {
+		6BD550911CE41E0700A44CB4 /* Build configuration list for PBXProject "ObjCExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6BD550AE1CE41E0700A44CB4 /* Debug */,
@@ -360,7 +357,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6BD550B01CE41E0700A44CB4 /* Build configuration list for PBXNativeTarget "ASJCoreDataOperationExample" */ = {
+		6BD550B01CE41E0700A44CB4 /* Build configuration list for PBXNativeTarget "ObjCExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6BD550B11CE41E0700A44CB4 /* Debug */,
@@ -372,13 +369,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		6BD550BB1CE4289700A44CB4 /* ASJCoreDataOperationExample.xcdatamodeld */ = {
+		6BD550BB1CE4289700A44CB4 /* ObjCExample.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				6BD550BC1CE4289700A44CB4 /* ASJCoreDataOperationExample.xcdatamodel */,
 			);
 			currentVersion = 6BD550BC1CE4289700A44CB4 /* ASJCoreDataOperationExample.xcdatamodel */;
-			path = ASJCoreDataOperationExample.xcdatamodeld;
+			path = ObjCExample.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

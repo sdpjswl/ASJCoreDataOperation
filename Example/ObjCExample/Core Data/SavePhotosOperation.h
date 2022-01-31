@@ -6,7 +6,7 @@
 //  Copyright © 2016 sudeep. All rights reserved.
 //
 
-#import "ASJCoreDataOperation.h"
+#import <ASJCoreDataOperation/ASJCoreDataOperation.h>
 
 @interface SavePhotosOperation : ASJCoreDataOperation
 

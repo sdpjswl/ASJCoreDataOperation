@@ -125,7 +125,7 @@ static NSString *const kCellIdentifier = @"cell";
     
     [operation setSaveBlock:^
      {
-        NSLog(@"saved");
+        // saved
     }];
     
     [operation setCompletionBlock:^
