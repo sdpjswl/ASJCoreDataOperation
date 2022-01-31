@@ -1,5 +1,11 @@
 # Change Log
 
+## [1.2](https://github.com/sdpjswl/ASJCoreDataOperation/releases/tag/1.2)
+Released on Monday, 31 Jan, 2022.
+
+#### Added
+* Support for iOS 10 and NSPersistentContainer.
+
 ## [1.1](https://github.com/sdpjswl/ASJCoreDataOperation/releases/tag/1.1)
 Released on Monday, 31 Jan, 2022.
 

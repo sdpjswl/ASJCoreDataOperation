@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name          = 'ASJCoreDataOperation'
-  s.version       = '1.1'
-  s.platform      = :ios, '9.0'
+  s.version       = '1.2'
+  s.platform      = :ios, '10.0'
   s.license       = { :type => 'MIT' }
   s.homepage      = 'https://github.com/sdpjswl/ASJCoreDataOperation'
   s.authors       = { 'Sudeep' => 'sdpjswl1@gmail.com' }
