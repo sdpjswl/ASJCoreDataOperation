@@ -102,10 +102,11 @@ static NSString *const kCellIdentifier = @"cell";
 - (void)setShouldShowIndicator:(BOOL)shouldShowIndicator
 {
     __weak typeof(self) weakSelf = self;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        _shouldShowIndicator = shouldShowIndicator;
-        self.navigationItem.rightBarButtonItem.enabled = !shouldShowIndicator;
+    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^
+     {
+        self->_shouldShowIndicator = shouldShowIndicator;
+        weakSelf.navigationItem.rightBarButtonItem.enabled = !shouldShowIndicator;
         
         if (shouldShowIndicator) {
             [weakSelf.indicator startAnimating];
@@ -115,7 +116,7 @@ static NSString *const kCellIdentifier = @"cell";
             [weakSelf.indicator stopAnimating];
             [weakSelf.indicator removeFromSuperview];
         }
-    });
+    }];
 }
 
 #pragma mark - Saving
