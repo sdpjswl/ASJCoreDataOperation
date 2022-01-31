@@ -42,7 +42,7 @@ NSManagedObjectContext *privateMoc = [[NSManagedObjectContext alloc] initWithCon
 privateMoc.persistentStoreCoordinator = appDelegatesPersistentStoreCoordinator;
 ```
 
-There are two methods for `moc`s, `performBlock:(void (^)())block` and `performBlockAndWait:(void (^)())block`. Any code written in those blocks is **guaranteed** to be executed on the same queue the `moc` is created. You **must** write your `CoreData` logic inside one of these methods. The difference between the two is that `performBlockAndWait:` will block the queue until it's operation is completed.
+There are two methods for `moc`s, `performBlock:(void (^)())block` and `performBlockAndWait:(void (^)())block`. Any code written in those blocks is **guaranteed** to be executed on the same queue the `moc` is created. You **must** write your `CoreData` logic inside one of these methods. The difference between the two is that `performBlockAndWait:` will block the queue until its operation is completed.
 
 ### Saving on a private queue
 
