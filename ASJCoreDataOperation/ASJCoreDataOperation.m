@@ -42,46 +42,46 @@
 
 - (instancetype)init
 {
-  return [self initWithPrivateMoc:nil mainMoc:nil];
+    return [self initWithPrivateMoc:nil mainMoc:nil];
 }
 
 - (instancetype)initWithPrivateMoc:(NSManagedObjectContext *)privateMoc mainMoc:(NSManagedObjectContext *)mainMoc
 {
-  self = [super init];
-  if (self)
-  {
-    _privateMoc = privateMoc;
-    _mainMoc = mainMoc;
-    [self setup];
-  }
-  return self;
+    self = [super init];
+    if (self)
+    {
+        _privateMoc = privateMoc;
+        _mainMoc = mainMoc;
+        [self setup];
+    }
+    return self;
 }
 
 #pragma mark - Setup
 
 - (void)setup
 {
-  [self setupMocs];
-  [self listenForMocSavedNotification];
+    [self setupMocs];
+    [self listenForMocSavedNotification];
 }
 
 - (void)setupMocs
 {
-  // fallback to app delegate's moc if user has not provided one
-  if (!_mainMoc) {
-    _mainMoc = self.appDelegateMoc;
-  }
-  
-  // create a new private moc on private queue if user has not provided one
-  if (!_privateMoc)
-  {
-    _privateMoc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    _privateMoc.persistentStoreCoordinator = _mainMoc.persistentStoreCoordinator;
-  }
-  
-  // must provide this to resolve any conflicts while merging
-  _privateMoc.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
-  _privateMoc.undoManager = nil;
+    // fallback to app delegate's moc if user has not provided one
+    if (!_mainMoc) {
+        _mainMoc = self.appDelegateMoc;
+    }
+    
+    // create a new private moc on private queue if user has not provided one
+    if (!_privateMoc)
+    {
+        _privateMoc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        _privateMoc.persistentStoreCoordinator = _mainMoc.persistentStoreCoordinator;
+    }
+    
+    // must provide this to resolve any conflicts while merging
+    _privateMoc.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
+    _privateMoc.undoManager = nil;
 }
 
 - (NSManagedObjectContext *)appDelegateMoc
@@ -91,9 +91,13 @@
   SEL managedObjectContext = NSSelectorFromString(@"managedObjectContext");
   NSAssert([appDelegate respondsToSelector:managedObjectContext], @"If managedObjectContext is not present in AppDelegate, you must provide one that operates on the main queue while initializing the operation.");
   
+    
+    SEL managedObjectContext = NSSelectorFromString(@"managedObjectContext");
+    NSAssert([appDelegate respondsToSelector:managedObjectContext], @"If managedObjectContext is not present in AppDelegate, you must provide one that operates on the main queue while initializing the operation.");
+    
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-  return [appDelegate performSelector:managedObjectContext];
+    return [appDelegate performSelector:managedObjectContext];
 #pragma clang diagnostic pop
 }
 
@@ -101,48 +105,49 @@
 
 - (void)listenForMocSavedNotification
 {
-  [self.notificationCenter addObserver:self selector:@selector(contextDidSave:) name:NSManagedObjectContextDidSaveNotification object:_privateMoc];
+    [self.notificationCenter addObserver:self selector:@selector(contextDidSave:) name:NSManagedObjectContextDidSaveNotification object:_privateMoc];
 }
 
 - (void)contextDidSave:(NSNotification *)note
 {
-  if ([note.object isEqual:_mainMoc]) {
-    return;
-  }
-  
-  [_mainMoc performBlock:^
-   {
-     [_mainMoc mergeChangesFromContextDidSaveNotification:note];
-     
-     // saving is complete here
-     if (_saveBlock) {
-       _saveBlock();
-     }
-   }];
+    if ([note.object isEqual:_mainMoc]) {
+        return;
+    }
+    
+    __weak typeof(self) weakSelf = self;
+    [_mainMoc performBlock:^
+     {
+        [weakSelf.mainMoc mergeChangesFromContextDidSaveNotification:note];
+        
+        // saving is complete here
+        if (weakSelf.saveBlock) {
+            weakSelf.saveBlock();
+        }
+    }];
 }
 
 - (void)dealloc
 {
-  [self.notificationCenter removeObserver:self];
+    [self.notificationCenter removeObserver:self];
 }
 
 - (NSNotificationCenter *)notificationCenter
 {
-  return [NSNotificationCenter defaultCenter];
+    return [NSNotificationCenter defaultCenter];
 }
 
 #pragma mark - Overrides
 
 - (void)main
 {
-  [_privateMoc performBlock:^{
-    [self coreDataOperation];
-  }];
+    [_privateMoc performBlock:^{
+        [self coreDataOperation];
+    }];
 }
 
 - (void)coreDataOperation
 {
-  NSAssert(NO, @"Method must be overridden in subclass: %s", __PRETTY_FUNCTION__);
+    NSAssert(NO, @"Method must be overridden in subclass: %s", __PRETTY_FUNCTION__);
 }
 
 @end

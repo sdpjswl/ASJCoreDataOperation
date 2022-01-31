@@ -27,7 +27,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^SaveBlock)();
+typedef void(^SaveBlock)(void);
 
 @interface ASJCoreDataOperation : NSOperation
 
