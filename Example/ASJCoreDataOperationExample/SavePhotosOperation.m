@@ -27,7 +27,9 @@
         if (error) {
             NSLog(@"error fetching existing photo: %@", error.localizedDescription);
         }
-        if (!result.count) {
+        
+        if (!result.count)
+        {
             photoManagedObject = (Photo *)[NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:self.privateMoc];
         }
         else {
@@ -39,12 +41,11 @@
         photoManagedObject.title = photoInfo[@"title"];
         photoManagedObject.url = photoInfo[@"url"];
         photoManagedObject.thumbnailUrl = photoInfo[@"thumbnailUrl"];
-    }
-    
-    NSError *error = nil;
-    BOOL success = [self.privateMoc save:&error];
-    if (!success || error) {
-        NSLog(@"error saving photo: %@", error.localizedDescription);
+        
+        BOOL success = [self.privateMoc save:&error];
+        if (!success || error) {
+            NSLog(@"error saving photo: %@", error.localizedDescription);
+        }
     }
 }
 
