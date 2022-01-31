@@ -87,6 +87,9 @@ static NSString *const kCellIdentifier = @"cell";
                 return;
             }
             
+            // limit to 500
+            photos = [photos subarrayWithRange:NSMakeRange(0, 500)];
+            
             // save
             [self savePhotosToCoreData:photos];
             
@@ -101,7 +104,7 @@ static NSString *const kCellIdentifier = @"cell";
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        weakSelf.shouldShowIndicator = shouldShowIndicator;
+        _shouldShowIndicator = shouldShowIndicator;
         self.navigationItem.rightBarButtonItem.enabled = !shouldShowIndicator;
         
         if (shouldShowIndicator) {

@@ -16,7 +16,7 @@
 		6BD550BD1CE4289700A44CB4 /* ObjCExample.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6BD550BB1CE4289700A44CB4 /* ObjCExample.xcdatamodeld */; };
 		6BD550CE1CE429EE00A44CB4 /* Photo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD550CB1CE429EE00A44CB4 /* Photo+CoreDataProperties.m */; };
 		6BD550CF1CE429EE00A44CB4 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BD550CD1CE429EE00A44CB4 /* Photo.m */; };
-		C018350127A892FA00509DFD /* ASJCoreDataOperation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C018350027A892F900509DFD /* ASJCoreDataOperation.framework */; };
+		C09A114B27A89A7D007B6BB1 /* ASJCoreDataOperation_ObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C09A114A27A89A7D007B6BB1 /* ASJCoreDataOperation_ObjC.framework */; };
 		C0D1B3DF27A89417001F8453 /* SavePhotosOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C0D1B3DD27A89417001F8453 /* SavePhotosOperation.m */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +36,7 @@
 		6BD550CB1CE429EE00A44CB4 /* Photo+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Photo+CoreDataProperties.m"; sourceTree = "<group>"; };
 		6BD550CC1CE429EE00A44CB4 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
 		6BD550CD1CE429EE00A44CB4 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
-		C018350027A892F900509DFD /* ASJCoreDataOperation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ASJCoreDataOperation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C09A114A27A89A7D007B6BB1 /* ASJCoreDataOperation_ObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ASJCoreDataOperation_ObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0D1B3DD27A89417001F8453 /* SavePhotosOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavePhotosOperation.m; sourceTree = "<group>"; };
 		C0D1B3DE27A89417001F8453 /* SavePhotosOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavePhotosOperation.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -46,7 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C018350127A892FA00509DFD /* ASJCoreDataOperation.framework in Frameworks */,
+				C09A114B27A89A7D007B6BB1 /* ASJCoreDataOperation_ObjC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,7 +112,7 @@
 		C01834FF27A892F900509DFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C018350027A892F900509DFD /* ASJCoreDataOperation.framework */,
+				C09A114A27A89A7D007B6BB1 /* ASJCoreDataOperation_ObjC.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

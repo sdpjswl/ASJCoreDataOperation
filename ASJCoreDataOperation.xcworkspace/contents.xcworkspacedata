@@ -5,6 +5,9 @@
       location = "container:ASJCoreDataOperation.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:/Users/sudeep/Desktop/Projects/ASJCoreDataOperation/Example/ObjCExample.xcodeproj">
+      location = "group:Examples/ObjC/ObjCExample.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Examples/Swift/SwiftExample.xcodeproj">
    </FileRef>
 </Workspace>
