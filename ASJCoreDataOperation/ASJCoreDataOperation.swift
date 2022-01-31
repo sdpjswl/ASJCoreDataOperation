@@ -30,6 +30,7 @@ open class ASJCoreDataOperation: Operation
     /// If you pass in your own managed object context during initialization, this property will hold it. If you don't, one will be created internally and will be available publicly with this property. You can use this managed object context property to create an NSFetchedResultsController and do asynchronous fetches. It is recommended that you do your fetches in the background and update UI on the main queue.
     public var privateMoc: NSManagedObjectContext!
     
+    /// You can listen to this block to get the save operation completiion event.
     public var saveBlock: (() -> Void)?
     
     
