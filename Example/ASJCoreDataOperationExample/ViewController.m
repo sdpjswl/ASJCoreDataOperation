@@ -149,7 +149,7 @@ static NSString *const kCellIdentifier = @"cell";
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     Photo *photoManagedObject = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = photoManagedObject.title;
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", photoManagedObject.photoId.stringValue, photoManagedObject.title];
 }
 
 #pragma mark - NSFetchedResultsController
@@ -163,7 +163,7 @@ static NSString *const kCellIdentifier = @"cell";
     @synchronized(self)
     {
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Photo"];
-        fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"photoId" ascending:YES]];
+        fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"photoId" ascending:NO]];
         
         _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.photosPrivateMoc sectionNameKeyPath:nil cacheName:nil];
         _fetchedResultsController.delegate = self;
