@@ -86,11 +86,11 @@
 
 - (NSManagedObjectContext *)appDelegateMoc
 {
-  id<UIApplicationDelegate> appDelegate = [UIApplication sharedApplication].delegate;
-  
-  SEL managedObjectContext = NSSelectorFromString(@"managedObjectContext");
-  NSAssert([appDelegate respondsToSelector:managedObjectContext], @"If managedObjectContext is not present in AppDelegate, you must provide one that operates on the main queue while initializing the operation.");
-  
+    __block id<UIApplicationDelegate> appDelegate = nil;
+    
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        appDelegate = [UIApplication sharedApplication].delegate;
+    });
     
     SEL managedObjectContext = NSSelectorFromString(@"managedObjectContext");
     NSAssert([appDelegate respondsToSelector:managedObjectContext], @"If managedObjectContext is not present in AppDelegate, you must provide one that operates on the main queue while initializing the operation.");
