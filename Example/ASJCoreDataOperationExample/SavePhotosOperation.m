@@ -21,20 +21,17 @@
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"photoId == %@", photoInfo[@"id"]];
         fetchRequest.predicate = predicate;
         
-        Photo *photoManagedObject = nil;
         NSError *error = nil;
         NSArray *result = [self.privateMoc executeFetchRequest:fetchRequest error:&error];
         if (error) {
             NSLog(@"error fetching existing photo: %@", error.localizedDescription);
         }
         
-        if (!result.count)
-        {
-            photoManagedObject = (Photo *)[NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:self.privateMoc];
+        if (result.count > 0) {
+            continue;
         }
-        else {
-            photoManagedObject = result.firstObject;
-        }
+        
+        Photo *photoManagedObject = (Photo *)[NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:self.privateMoc];
         
         photoManagedObject.albumId = photoInfo[@"albumId"];
         photoManagedObject.photoId = photoInfo[@"id"];
