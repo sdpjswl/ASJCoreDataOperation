@@ -13,11 +13,11 @@ Pod::Spec.new do |s|
   s.swift_version = '5'
   
   s.subspec 'Swift' do |spec|
-    spec.source_files  = 'ASJCoreDataOperation/*.{swift}
+    spec.source_files  = 'ASJCoreDataOperation/*.{swift}'
   end
   
   s.subspec 'Obj-C' do |spec|
-    spec.source_files  = 'ASJCoreDataOperation/*.{h,m}
+    spec.source_files  = 'ASJCoreDataOperation/*.{h,m}'
   end
 
 end
