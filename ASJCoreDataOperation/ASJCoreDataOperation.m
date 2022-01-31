@@ -24,6 +24,7 @@
 #import "ASJCoreDataOperation.h"
 #import <UIKit/UIApplication.h>
 #import <CoreData/NSManagedObjectContext.h>
+#import <CoreData/NSPersistentContainer.h>
 
 @interface ASJCoreDataOperation ()
 
@@ -93,12 +94,27 @@
     });
     
     SEL managedObjectContext = NSSelectorFromString(@"managedObjectContext");
-    NSAssert([appDelegate respondsToSelector:managedObjectContext], @"If managedObjectContext is not present in AppDelegate, you must provide one that operates on the main queue while initializing the operation.");
-    
+    if ([appDelegate respondsToSelector:managedObjectContext])
+    {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-    return [appDelegate performSelector:managedObjectContext];
+        return [appDelegate performSelector:managedObjectContext];
 #pragma clang diagnostic pop
+    }
+    
+    SEL persistentContainer = NSSelectorFromString(@"persistentContainer");
+    if ([appDelegate respondsToSelector:persistentContainer])
+    {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        NSPersistentContainer *container = [appDelegate performSelector:persistentContainer];
+        return container.viewContext;
+#pragma clang diagnostic pop
+    }
+    
+    NSAssert(NO, @"Error: No 'managedObjectContext' found that operates on the main queue.\nSolution: Make sure that a 'managedObjectContext' or 'persistentContainer' is present in AppDelegate or pass a 'managedObjectContext' while initializing the operation.");
+    
+    return nil;
 }
 
 #pragma mark - Notifications
