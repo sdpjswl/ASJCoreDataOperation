@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "container:ASJCoreDataOperation.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Examples/ObjC/ObjCExample.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Examples/Swift/SwiftExample.xcodeproj">
+   </FileRef>
+</Workspace>

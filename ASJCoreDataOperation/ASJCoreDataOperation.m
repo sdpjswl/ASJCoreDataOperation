@@ -22,9 +22,9 @@
 // THE SOFTWARE.
 
 #import "ASJCoreDataOperation.h"
-#import <UIKit/UIApplication.h>
 #import <CoreData/NSManagedObjectContext.h>
 #import <CoreData/NSPersistentContainer.h>
+#import <UIKit/UIApplication.h>
 
 @interface ASJCoreDataOperation ()
 

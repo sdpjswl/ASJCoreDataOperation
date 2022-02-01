@@ -2,8 +2,13 @@
 
 Adding concurrency/multi-threading to `CoreData` is not very straightforward and obvious. The main issue is with `NSManagedObjectContext`, which is thread unsafe. The default one created in `AppDelegate` is created on the main thread:
 
+#### Swift:
+```swift
+var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+```
+#### Objective-C:
 ```objc
-_managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+NSManagedObjectContext *managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
 ```
 
 The main drawback of using `AppDelegate`'s managed object context is that whenever a save, fetch or delete operation is performed, the main thread/UI will get blocked. If you are doing small operations, this may not be noticeable. But for larger operations, it will pose a problem.
@@ -14,11 +19,14 @@ The solution is to do such `CoreData` operations in the background and only when
 
 CocoaPods is the preferred way to install this library. Add this command to your `Podfile`:
 
+#### Swift:
 ```ruby
 pod 'ASJCoreDataOperation'
 ```
-
-For the same library in `Swift`, see [ASJCoreDataOperation-Swift](https://github.com/sdpjswl/ASJCoreDataOperation-Swift).
+#### Objective-C:
+```ruby
+pod 'ASJCoreDataOperation/Obj-C'
+```
 
 # Background
 
@@ -26,8 +34,8 @@ For the same library in `Swift`, see [ASJCoreDataOperation-Swift](https://github
 
 ### Concurrency options
 
-There are three concurrency types defined in `NSManagedObjectContext.h`:
-- `NSConfinementConcurrencyType` (which is marked `NS_ENUM_DEPRECATED`)
+There are three concurrency types:
+- `NSConfinementConcurrencyType` (which is marked deprecated from iOS 9.0)
 - `NSPrivateQueueConcurrencyType`
 - `NSMainQueueConcurrencyType`
 
@@ -37,6 +45,12 @@ You should not use `NSConfinementConcurrencyType` anymore since it's obsolete an
 
 You can create as many `moc`s as you wish. During saving, it must go through an `NSPersistentStoreCoordinator` to write data to an sqlite file. You can use the one implemented in `AppDelegate` or provide your own. Just make sure that no matter what kind of store your app has; `NSSQLiteStoreType`, `NSXMLStoreType`, `NSBinaryStoreType` or `NSInMemoryStoreType`, the coordinator object must be tied to the same destination.
 
+#### Swift:
+```swift
+var privateMoc = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+privateMoc.persistentStoreCoordinator = appDelegatesPersistentStoreCoordinator;
+```
+#### Objective-C:
 ```objc
 NSManagedObjectContext *privateMoc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
 privateMoc.persistentStoreCoordinator = appDelegatesPersistentStoreCoordinator;
@@ -50,12 +64,27 @@ Whenever a `save` happens on a private `moc`, data will be written to the sqlite
 
 If you need the main queue to be notified about any changes made by a private context, you need to merge those changes from the private `moc` to the main `moc`. To do so, you have to start observing for `NSManagedObjectContextDidSaveNotification` on the private `moc`.
 
+#### Swift:
+```swift
+NotificationCenter.default.addObserver(self, selector: #selector(contextDidSave(note:)), name: .NSManagedObjectContextDidSave, object: privateMoc)
+```
+#### Objective-C:
 ```objc
 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextDidSave:) name:NSManagedObjectContextDidSaveNotification object:privateMoc];
 ```
 
 In `contextDidSave:` we need to merge the private `moc` changes into the main `moc`. You MUST use the `moc`'s `performBlock:` or `performBlockAndWait:` methods to ensure the merge happens on the correct thread.
 
+#### Swift:
+```swift
+func contextDidSave(note: Notification)
+{
+  mainMoc.perform { () -> Void in
+    self.mainMoc.mergeChanges(fromContextDidSave: note)
+  }
+}
+```
+#### Objective-C:
 ```objc
 - (void)contextDidSave:(NSNotification *)note
 {
@@ -67,6 +96,11 @@ In `contextDidSave:` we need to merge the private `moc` changes into the main `m
 
 The `note` object has information of all modifications made to the managed objects. There can be issues however when merging data between two `moc`s and conflicts may arise. So, you must provide a `mergePolicy` so that `CoreData` knows how to resolve them.
 
+#### Swift:
+```swift
+privateMoc.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+```
+#### Objective-C:
 ```objc
 privateMoc.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
 ```
@@ -75,48 +109,74 @@ privateMoc.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
 
 # What this library does
 
-`ASJCoreDataOperation` is a subclass of `NSOperation` that provides private queue support out of the box. This class is designed to be subclassed and **will not** work without it.
+`ASJCoreDataOperation` is a subclass of `Operation`/`NSOperation` that provides private queue support out of the box. This class is designed to be subclassed and **will not** work without it.
 
+#### Swift:
+```swift
+convenience init(privateMoc: NSManagedObjectContext!, mainMoc: NSManagedObjectContext?)
+```
+#### Objective-C:
 ```objc
 - (instancetype)initWithPrivateMoc:(nullable NSManagedObjectContext *)privateMoc mainMoc:(nullable NSManagedObjectContext *)mainMoc NS_DESIGNATED_INITIALIZER;
 ```
-
 This is the recommended way to create an instance of your subclass. You may pass `nil` in both arguments or use the `init` method. In those cases, a private moc will be created and `AppDelegate`'s `moc` will be accessed to be used as the `mainMoc`. If your `AppDelegate` does not have an `moc` object, you must provide one that is created on the main queue.
 
+#### Swift:
+```swift
+public var privateMoc: NSManagedObjectContext!
+```
+#### Objective-C:
 ```objc
 @property (readonly, strong, nonatomic) NSManagedObjectContext *privateMoc;
 ```
-
 Irrespective of the way the private `moc` is created, it is publicly exposed and you may use it, say to tie an `NSFetchedResultsController` to it and do asynchronous fetches.
 
+#### Swift:
+```swift
+public var saveBlock: (() -> Void)?
+```
+#### Objective-C:
 ```objc
 @property (copy) SaveBlock saveBlock;
 ```
 A block that is fired when a save operation is completed.
 
+#### Swift:
+```swift 
+public func coreDataOperation()
+```
+#### Objective-C:
 ```objc 
 - (void)coreDataOperation;
 ```
-
 This is the method you are **required** to override in your subclass. Any `CoreData` operations you wish to perform should be written here. The library will ensure that this method is called on the correct thread.
 
 ### Usage
 
+#### Swift:
+```swift
+var operationQueue = OperationQueue()
+let operation = SomeCoreDataOperationSubclass(privateMoc: somePrivateMoc, mainMoc: nil)
+operationQueue.addOperation(operation)
+```
+#### Objective-C:
 ```objc
 NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
 SomeCoreDataOperationSubclass *operation = [[SomeCoreDataOperationSubclass alloc] initWithPrivateMoc:somePrivateMoc mainMoc:nil];
 [operationQueue addOperation:operation];
 ```
-As soon the `operation` is added to the `operationQueue`, it will start running on a background queue.
+As soon the `operation` is added to the `operationQueue`, it will start running on a background queue. You can use the `completionBlock` property to get the event when the operation finishes.
 
 # Credits
 
 - To [Shashank Pali](https://github.com/shashankpali) for fixing the UI issues in the example project.
+- To [Manish Pathak](https://github.com/manish-1988) for the motivation.
 - [Core Data Programming Guide - Concurrency](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CoreData/Concurrency.html)
 - [Core Data from Scratch: Concurrency](http://code.tutsplus.com/tutorials/core-data-from-scratch-concurrency--cms-22131)
 - [A Networked Core Data Application](https://www.objc.io/issues/10-syncing-data/networked-core-data-application/)
 - [Common Background Practices](https://www.objc.io/issues/2-concurrency/common-background-practices/)
 - [Importing Large Data Sets](https://www.objc.io/issues/4-core-data/importing-large-data-sets-into-core-data/)
+- [iOS unrecognized selector sent to instance in Swift](http://stackoverflow.com/questions/24153058/ios-unrecognized-selector-sent-to-instance-in-swift)
 
 # To-do
 

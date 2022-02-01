@@ -59,7 +59,7 @@ typedef void(^SaveBlock)(void);
 /**
  *  The setter for the save block. You can listen to this block to get the save operation completiion event.
  *
- *  @param saveBlock The block that will be firec when a save operation is completed.
+ *  @param saveBlock The block that will be fired when a save operation is completed.
  */
 - (void)setSaveBlock:(SaveBlock _Nonnull)saveBlock;
 
