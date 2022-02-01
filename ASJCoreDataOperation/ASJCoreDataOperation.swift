@@ -33,7 +33,6 @@ open class ASJCoreDataOperation: Operation
     /// You can listen to this block to get the save operation completiion event.
     public var saveBlock: (() -> Void)?
     
-    
     /// A reference to a managed object context created on the main queue will be stored internally. This context's persistent store coordinator will work the the sqlite file.
     private var mainMoc: NSManagedObjectContext?
     
