@@ -4,7 +4,7 @@
 Released on Tuesday, 1 Feb, 2022.
 
 #### Added
-* Support for Swift and Objective-C library in one podspec.
+* Support for Swift and Objective-C libraries in one podspec.
 
 ## [1.2](https://github.com/sdpjswl/ASJCoreDataOperation/releases/tag/1.2)
 Released on Monday, 31 Jan, 2022.
